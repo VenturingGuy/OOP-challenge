@@ -116,6 +116,11 @@ class superRobot(Robot):
         self.armor = self.armor + (self.pilot.grit * 10)
         self.evasion = self.evasion + (self.pilot.intuition * 8)
 
+    def size_adjust(self):
+        if self.size == "Large":
+            self.armor += 3
+            self.evasion -= 2
+
 class realRobot(Robot):
 
     def __init__(self, unit, starting_health, atk, armor, evasion, weapons, pilot=Pilot("", 0, 0, 0, 0, False)):
@@ -128,6 +133,11 @@ class realRobot(Robot):
         self.atk = self.atk + (self.pilot.determination * 10)
         self.armor = self.armor + (self.pilot.grit * 10)
         self.evasion = self.evasion + (self.pilot.intuition * 5)
+
+    def size_adjust(self):
+        if self.size == "Small":
+            self.armor -= 1
+            self.evasion += 2
 
 if __name__ == "__main__":
     Koji = Pilot("Koji", 4, 4, 3, 0, False)
