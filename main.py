@@ -1,16 +1,25 @@
 import random
 
 class Pilot:
-    def __init__(self, name, determination, grit, intuition, kills):
+    def __init__(self, name, determination, grit, intuition, kills, newtype_status):
         self.name = name
         self.determination = determination
         self.grit = grit
         self.intuition = intuition
         self.kills = kills
+        self.newtype_status = newtype_status
+
+    def ace_bonus(self):
+        if self.kills > 50:
+            self.determination += 2
+        
+    def newtype_checker(self):
+        if self.newtype_status == True:
+            self.intuition += 1
 
 class Robot:
 
-    def __init__(self, unit, starting_health, atk, armor, evasion, weapons, pilot=Pilot("", 0, 0, 0, 0)):
+    def __init__(self, unit, starting_health, atk, armor, evasion, weapons, pilot=Pilot("", 0, 0, 0, 0, False)):
         self.unit = unit
         self.pilot = pilot
         self.starting_health = starting_health
@@ -22,6 +31,8 @@ class Robot:
 
     def pilot_adjust(self):
         print(f'{self.unit} is a Robot piloted by {self.pilot.name}.')
+        self.pilot.ace_bonus()
+        self.pilot.newtype_checker()
         self.atk = self.atk + (self.pilot.determination * 10)
         self.armor = self.armor + (self.pilot.grit * 10)
         self.evasion = self.evasion + (self.pilot.intuition * 10)
@@ -94,7 +105,7 @@ class Robot:
 
 class superRobot(Robot):
 
-    def __init__(self, unit, starting_health, atk, armor, evasion, weapons, pilot=Pilot("", 0, 0, 0, 0)):
+    def __init__(self, unit, starting_health, atk, armor, evasion, weapons, pilot=Pilot("", 0, 0, 0, 0, False)):
         super().__init__(unit, starting_health, atk, armor, evasion, weapons, pilot)
         self.type = "Super"
         self.size = "Large"
@@ -107,7 +118,7 @@ class superRobot(Robot):
 
 class realRobot(Robot):
 
-    def __init__(self, unit, starting_health, atk, armor, evasion, weapons, pilot=Pilot("", 0, 0, 0, 0)):
+    def __init__(self, unit, starting_health, atk, armor, evasion, weapons, pilot=Pilot("", 0, 0, 0, 0, False)):
         super().__init__(unit, starting_health, atk, armor, evasion, weapons, pilot)
         self.type = "Real"
         self.size = "Small"
@@ -119,11 +130,11 @@ class realRobot(Robot):
         self.evasion = self.evasion + (self.pilot.intuition * 5)
 
 if __name__ == "__main__":
-    Koji = Pilot("Koji", 4, 4, 3, 0)
+    Koji = Pilot("Koji", 4, 4, 3, 0, False)
 
     Mazinger_Z = superRobot("Mazinger Z", 280, 150, 90, 40, "Rocket Punch", Koji)
 
-    Amuro = Pilot("Amuro", 4, 3, 5, 0)
+    Amuro = Pilot("Amuro", 4, 3, 5, 0, True)
     Nu_Gundam = realRobot("Nu Gundam", 130, 140, 40, 60, "Fin Funnels", Amuro)
 
     Mazinger_Z.pilot_adjust()
