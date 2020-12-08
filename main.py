@@ -101,9 +101,9 @@ class superRobot(Robot):
 
     def pilot_adjust(self):
         print(f'{self.unit} is a {self.type} Robot piloted by {self.pilot.name}.')
-        self.atk = self.atk + (self.pilot.determination * 10)
+        self.atk = self.atk + (self.pilot.determination * 8)
         self.armor = self.armor + (self.pilot.grit * 10)
-        self.evasion = self.evasion + (self.pilot.intuition * 10)
+        self.evasion = self.evasion + (self.pilot.intuition * 8)
 
 class realRobot(Robot):
 
