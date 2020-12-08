@@ -41,6 +41,8 @@ class Robot:
             print("Draw")
         else:
             while self.is_alive() and opponent.is_alive():
+                print(self.current_health)
+                print(opponent.current_health)
                 if opponent.evasion_check() == False:
                     opponent.take_damage(self.attack(opponent))
                     if opponent.is_alive() == False:
@@ -97,11 +99,11 @@ class superRobot(Robot):
         self.type = "Super"
         self.size = "Large"
 
-    def announce_type(self):
+    def pilot_adjust(self):
         print(f'{self.unit} is a {self.type} Robot piloted by {self.pilot.name}.')
-        self.atk = self.atk + (self.pilot.determination * 8)
+        self.atk = self.atk + (self.pilot.determination * 10)
         self.armor = self.armor + (self.pilot.grit * 10)
-        self.evasion = self.evasion + (self.pilot.intuition * 7)
+        self.evasion = self.evasion + (self.pilot.intuition * 10)
 
 class realRobot(Robot):
 
@@ -110,16 +112,16 @@ class realRobot(Robot):
         self.type = "Real"
         self.size = "Small"
         
-    def announce_type(self):
+    def pilot_adjust(self):
         print(f'{self.unit} is a {self.type} Robot piloted by {self.pilot.name}.')
-        self.atk = self.atk + (self.pilot.determination * 8)
-        self.armor = self.armor + (self.pilot.grit * 8)
-        self.evasion = self.evasion + (self.pilot.intuition * 10)
+        self.atk = self.atk + (self.pilot.determination * 10)
+        self.armor = self.armor + (self.pilot.grit * 10)
+        self.evasion = self.evasion + (self.pilot.intuition * 5)
 
 if __name__ == "__main__":
     Koji = Pilot("Koji", 4, 4, 3, 0)
 
-    Mazinger_Z = superRobot("Mazinger Z", 280, 150, 110, 40, "Rocket Punch", Koji)
+    Mazinger_Z = superRobot("Mazinger Z", 280, 150, 90, 40, "Rocket Punch", Koji)
 
     Amuro = Pilot("Amuro", 4, 3, 5, 0)
     Nu_Gundam = realRobot("Nu Gundam", 130, 140, 40, 60, "Fin Funnels", Amuro)
